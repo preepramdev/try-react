@@ -41,7 +41,7 @@ function App() {
     }
   }
 
-  function handleClearCompleteTodo() {
+  function handleClearCompleteTodos() {
     const uncompleteTodos = todos.filter(todo =>
       todo.complete === false
     );
@@ -60,7 +60,7 @@ function App() {
       <TodoList todos={todos} toggleTodo={toggleTodo} />
       <input ref={todoNameRef} type="text" />
       <button onClick={handleAddTodo}>Add Todo</button>
-      <button onClick={handleClearCompleteTodo}>Clear Completed Todos</button>
+      <button onClick={handleClearCompleteTodos}>Clear Completed Todos</button>
       <div>{calculateUncompleteTodo()} left to do</div>
     </>
   )
