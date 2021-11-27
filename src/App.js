@@ -7,6 +7,7 @@ function App() {
 
   const LOCAL_STORAGE_KEY = 'todoApp.todos';
 
+  // set todos if exist in local
   useEffect(() => {
     const storedTodos = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
     if (storedTodos) {
@@ -14,6 +15,7 @@ function App() {
     }
   }, []);
 
+  // save todos to local
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(todos));
   }, [todos]);
@@ -25,7 +27,7 @@ function App() {
     setTodos(newTodos);
   }
 
-  function handleAddTodo() {
+  function addTodo() {
     const nameInput = todoNameRef.current.value;
     if (nameInput !== '') {
       setTodos(oldTodos => {
@@ -41,14 +43,14 @@ function App() {
     }
   }
 
-  function handleClearCompleteTodos() {
+  function clearCompleteTodos() {
     const uncompleteTodos = todos.filter(todo =>
       todo.complete === false
     );
     setTodos(uncompleteTodos);
   }
 
-  function calculateUncompleteTodo() {
+  function calculateUncompleteTodos() {
     const uncompleteTodos = todos.filter(todo =>
       todo.complete === false
     );
@@ -59,9 +61,9 @@ function App() {
     <>
       <TodoList todos={todos} toggleTodo={toggleTodo} />
       <input ref={todoNameRef} type="text" />
-      <button onClick={handleAddTodo}>Add Todo</button>
-      <button onClick={handleClearCompleteTodos}>Clear Completed Todos</button>
-      <div>{calculateUncompleteTodo()} left to do</div>
+      <button onClick={addTodo}>Add Todo</button>
+      <button onClick={clearCompleteTodos}>Clear Completed Todos</button>
+      <div>{calculateUncompleteTodos()} left to do</div>
     </>
   )
 }
